@@ -1,0 +1,23 @@
+{
+  "name": "webhook-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test-adyen": "node .\\resources\\generator.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrey5608/webhook-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrey5608/webhook-generator/issues"
+  },
+  "homepage": "https://github.com/andrey5608/webhook-generator#readme",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  }
+}
