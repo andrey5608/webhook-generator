@@ -1,16 +1,8 @@
 import moment = require('moment');
 import { calculateHmac } from './hmac';
-import { WebhookData, WebhookDataParams } from './webhook-data';
+import { WebhookData } from './webhook-data';
 
-export function generateWebhook(webhookDataParams: WebhookDataParams) {
-    console.log('adyen');
-    let webhookData = new WebhookData(webhookDataParams);
-    let event = generateEvent(webhookData);
-    console.log(JSON.stringify(event));
-    return event;
-}
-
-function generateEvent(webhookData: WebhookData) {
+export function generateEvent(webhookData: WebhookData) {
     let isSuccessful = webhookData.executionResult.toString().toLowerCase();
     let hmac = calculateHmac(
         webhookData.adyenHmacKey,
@@ -56,5 +48,3 @@ function generateEvent(webhookData: WebhookData) {
         ],
     };
 }
-
-generateWebhook({ amountInCents: 1111 }); // TODO remove
