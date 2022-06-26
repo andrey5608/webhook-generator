@@ -2,7 +2,8 @@
 
 ## Adyen
 
-To use this generation, just call `generateWebhook({prop: value, ...})` using these data:
+To use this generation, just call `generateAdyenWebhook({prop: value, ...})` using these data:
+
 ```
 checkoutSessionId?: string,
 adyenHmacKey?: string,
@@ -21,6 +22,20 @@ originalReference?: string
 ```
 
 e.g.
-`generateWebhook({checkoutSessionId: 'ASJDJSFNJABNFJN', currency: 'USD'})`
+```
+const webhookGenerator = require('webhook-generator'); // or import { generateAdyenWebhook } from 'webhook-generator';
 
-If you will no specify these data, library will use the default data.
+// just default webhook
+let webhook = webhookGenerator.generateAdyenWebhook({});
+
+// customized one
+let customWebhook = webhookGenerator.generateAdyenWebhook({
+  adyenHmacKey:
+    '44782DEF547AAA06C910C43932B1EB0C71FC68D9D0C057550C48EC2ACF6BA056',
+  checkoutSessionId: 'ASJDJSFNJABNFJN',
+  currency: 'USD',
+});
+
+```
+
+If you will not specify these data, library will use the default data.
