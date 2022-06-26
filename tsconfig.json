@@ -6,7 +6,8 @@
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
-    "outDir": "resources"
+    "outDir": "resources",
+    "types": ["node"]
   },
   "include": ["**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
