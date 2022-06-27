@@ -1,11 +1,20 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-exports.generateEvent = void 0;
-var moment = require('moment');
-var hmac_1 = require('./hmac');
-function generateEvent(webhookData) {
-    var isSuccessful = webhookData.executionResult.toString().toLowerCase();
-    var hmac = (0, hmac_1.calculateHmac)(webhookData.adyenHmacKey, webhookData.pspReference, webhookData.originalReference, webhookData.merchantAccountCode, webhookData.merchantReference, webhookData.amountInCents, webhookData.currency, isSuccessful);
+import moment = require('moment');
+import { calculateHmac } from './hmac';
+import { AdyenWebhookData } from './adyen-webhook-data';
+
+export function generateAdyenEvent(webhookData: AdyenWebhookData) {
+    let isSuccessful = webhookData.executionResult.toString().toLowerCase();
+    let hmac = calculateHmac(
+        webhookData.adyenHmacKey,
+        webhookData.pspReference,
+        webhookData.originalReference,
+        webhookData.merchantAccountCode,
+        webhookData.merchantReference,
+        webhookData.amountInCents,
+        webhookData.currency,
+        isSuccessful
+    );
+
     return {
         live: 'false',
         notificationItems: [
@@ -32,11 +41,10 @@ function generateEvent(webhookData) {
                     operations: ['CANCEL', 'CAPTURE', 'REFUND'],
                     paymentMethod: webhookData.paymentMethod,
                     pspReference: webhookData.pspReference,
-                    reason: ''.concat(webhookData.authCode, ':').concat(webhookData.cardLast4, ':').concat(webhookData.expiryDate),
+                    reason: `${webhookData.authCode}:${webhookData.cardLast4}:${webhookData.expiryDate}`,
                     success: isSuccessful,
                 },
             },
         ],
     };
 }
-exports.generateEvent = generateEvent;
