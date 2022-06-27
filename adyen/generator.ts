@@ -2,7 +2,7 @@ import moment = require('moment');
 import { calculateHmac } from './hmac';
 import { AdyenWebhookData } from './adyen-webhook-data';
 
-export function generateEvent(webhookData: AdyenWebhookData) {
+export function generateAdyenEvent(webhookData: AdyenWebhookData) {
     let isSuccessful = webhookData.executionResult.toString().toLowerCase();
     let hmac = calculateHmac(
         webhookData.adyenHmacKey,
