@@ -69,10 +69,12 @@ e.g.
 const webhookGenerator = require('webhook-generator'); // or import { generateStripeWebhook } from 'webhook-generator';
 
 // just default webhook
-let webhook = webhookGenerator.generateStripeWebhook({});
+let webhookAndHeader = webhookGenerator.generateStripeWebhook({});
+let webhook = webhookAndHeader.event; // webhook object
+let header = webhookAndHeader.header; // header object like {'stripe-signature': 'here-will-be-hmac'}
 
 // customized one
-let customWebhook = webhookGenerator.generateStripeWebhook({
+let customWebhookAndHeader = webhookGenerator.generateStripeWebhook({
   stripeHmacKey:
 'whsec_...',
   apiVersion: '2020-03-02',
@@ -80,6 +82,12 @@ let customWebhook = webhookGenerator.generateStripeWebhook({
   amountInCents: 1234, // 12.34 USD
 });
 
+let customWebhook = customWebhookAndHeader.event; // webhook object
+let customWebhookHeader = customWebhookAndHeader.header; // header object like {'stripe-signature': 'here-will-be-hmac'}
+
 ```
 
 If you will not specify these data, library will use the default data.
+
+Note: you should send the 'stripe-signature' header with calculated hmac header on sending your POST webhook request.
+
