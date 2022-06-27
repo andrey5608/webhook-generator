@@ -1,4 +1,4 @@
-# webhooks-generator
+# webhook-generator
 
 ## Adyen
 
