@@ -1,6 +1,6 @@
 import moment = require('moment');
 
-export interface WebhookDataParams {
+export interface StripeWebhookDataParams {
     checkoutSessionId?: string,
     adyenHmacKey?: string,
     amountInCents?: number,
@@ -17,7 +17,7 @@ export interface WebhookDataParams {
     originalReference?: string
 }
 
-export class WebhookData implements WebhookDataParams {
+export class StripeWebhookData implements StripeWebhookDataParams {
     /**
      *
      * @param checkoutSessionId
@@ -36,7 +36,7 @@ export class WebhookData implements WebhookDataParams {
      * @param originalReference
      */
 
-    public constructor(webhookDataParams: WebhookDataParams
+    public constructor(webhookDataParams: StripeWebhookDataParams
     ) {
         webhookDataParams.checkoutSessionId = this.checkoutSessionId;
         webhookDataParams.adyenHmacKey = this.adyenHmacKey;
