@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+import { calculateHmacHeader } from './hmac';
 import { StripeWebhookData } from './stripe-webhook-data';
+const stripe = require('../stripe/lib/Webhooks.js');
 
 export function generateStripeEvent(webhookData: StripeWebhookData) {
-    return {
+    const EVENT_PAYLOAD = {
         'id': webhookData.id,
         'object': 'event',
         'api_version': webhookData.apiVersion,
@@ -195,4 +197,10 @@ export function generateStripeEvent(webhookData: StripeWebhookData) {
         },
         'type': webhookData.executionResult ? 'payment_intent.succeeded' : 'payment_intent.payment_failed'
     };
+
+    const EVENT_PAYLOAD_STRING = JSON.stringify(EVENT_PAYLOAD);
+    let header = calculateHmacHeader(EVENT_PAYLOAD_STRING, webhookData.stripeHmacKey);
+    let event = stripe.constructEvent(EVENT_PAYLOAD_STRING, header, webhookData.stripeHmacKey);
+
+    return { event, header };
 }
