@@ -1,6 +1,5 @@
 import { generateAdyenEvent } from '../adyen/generator';
 import { generateStripeEvent } from '../stripe/generator';
-import { calculateHmacHeader } from '../stripe/hmac';
 import { AdyenWebhookData, AdyenWebhookDataParams } from '../adyen/adyen-webhook-data';
 import { StripeWebhookData, StripeWebhookDataParams } from '../stripe/stripe-webhook-data';
 
@@ -15,9 +14,8 @@ export function generateAdyenWebhook(webhookDataParams: AdyenWebhookDataParams) 
 export function generateStripeWebhook(webhookDataParams: StripeWebhookDataParams) {
     console.log('stripe');
     let webhookData = new StripeWebhookData(webhookDataParams);
-    let event = generateStripeEvent(webhookData);
-    let header = calculateHmacHeader(webhookData, webhookDataParams.stripeHmacKey);
-    let webhookAndHeader = { event: event, header: { 'stripe-signature': header } };
-    console.log(JSON.stringify(webhookAndHeader));
-    return webhookAndHeader;
+    let webhookAndHeader = generateStripeEvent(webhookData);
+    let result = { event: webhookAndHeader.event, header: { 'stripe-signature': webhookAndHeader.header } };
+    console.log(JSON.stringify(result));
+    return result;
 }
