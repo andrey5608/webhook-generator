@@ -18,41 +18,6 @@ export interface AdyenWebhookDataParams {
 }
 
 export class AdyenWebhookData implements AdyenWebhookDataParams {
-    /**
-     *
-     * @param checkoutSessionId
-     * @param adyenHmacKey
-     * @param amountInCents
-     * @param unixEventDatetime
-     * @param merchantAccountCode
-     * @param merchantReference
-     * @param paymentMethod
-     * @param pspReference
-     * @param executionResult
-     * @param currency
-     * @param expiryDate
-     * @param authCode
-     * @param cardLast4
-     * @param originalReference
-     */
-
-    public constructor(webhookDataParams: AdyenWebhookDataParams
-    ) {
-        webhookDataParams.checkoutSessionId = this.checkoutSessionId;
-        webhookDataParams.adyenHmacKey = this.adyenHmacKey;
-        webhookDataParams.amountInCents = this.amountInCents;
-        webhookDataParams.unixEventDatetime = this.unixEventDatetime;
-        webhookDataParams.merchantAccountCode = this.merchantAccountCode;
-        webhookDataParams.merchantReference = this.merchantReference;
-        webhookDataParams.paymentMethod = this.paymentMethod;
-        webhookDataParams.pspReference = this.pspReference;
-        webhookDataParams.executionResult = this.executionResult;
-        webhookDataParams.currency = this.currency;
-        webhookDataParams.expiryDate = this.expiryDate;
-        webhookDataParams.authCode = this.authCode;
-        webhookDataParams.cardLast4 = this.cardLast4;
-        webhookDataParams.originalReference = this.originalReference;
-    }
     public checkoutSessionId: string = 'CSC8CDFFFFFFFFFFFF';
     public adyenHmacKey: string = 'ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH';
     public amountInCents: number = 9978;
@@ -67,4 +32,27 @@ export class AdyenWebhookData implements AdyenWebhookDataParams {
     public authCode: string = '067000';
     public cardLast4: string = '1111';
     public originalReference: string = '';
+
+    /**
+     * 
+     * @param webhookDataParams 
+     */
+
+    public constructor(webhookDataParams: AdyenWebhookDataParams
+    ) {
+        this.checkoutSessionId = webhookDataParams.checkoutSessionId ?? this.checkoutSessionId;
+        this.adyenHmacKey = webhookDataParams.adyenHmacKey ?? this.adyenHmacKey;
+        this.amountInCents = webhookDataParams.amountInCents ?? this.amountInCents;
+        this.unixEventDatetime = webhookDataParams.unixEventDatetime ?? this.unixEventDatetime;
+        this.merchantAccountCode = webhookDataParams.merchantAccountCode ?? this.merchantAccountCode;
+        this.merchantReference = webhookDataParams.merchantReference ?? this.merchantReference;
+        this.paymentMethod = webhookDataParams.paymentMethod ?? this.paymentMethod;
+        this.pspReference = webhookDataParams.pspReference ?? this.pspReference;
+        this.executionResult = webhookDataParams.executionResult ?? this.executionResult;
+        this.currency = webhookDataParams.currency ?? this.currency;
+        this.expiryDate = webhookDataParams.expiryDate ?? this.expiryDate;
+        this.authCode = webhookDataParams.authCode ?? this.authCode;
+        this.cardLast4 = webhookDataParams.cardLast4 ?? this.cardLast4;
+        this.originalReference = webhookDataParams.originalReference ?? this.originalReference;
+    }
 }

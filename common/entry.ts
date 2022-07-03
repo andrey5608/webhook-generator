@@ -4,18 +4,14 @@ import { AdyenWebhookData, AdyenWebhookDataParams } from '../adyen/adyen-webhook
 import { StripeWebhookData, StripeWebhookDataParams } from '../stripe/stripe-webhook-data';
 
 export function generateAdyenWebhook(webhookDataParams: AdyenWebhookDataParams): any {
-    console.log('adyen');
     let webhookData = new AdyenWebhookData(webhookDataParams);
     let event = generateAdyenEvent(webhookData);
-    console.log(JSON.stringify(event));
     return event;
 }
 
 export function generateStripeWebhook(webhookDataParams: StripeWebhookDataParams): any {
-    console.log('stripe');
     let webhookData = new StripeWebhookData(webhookDataParams);
     let webhookAndHeader = generateStripeEvent(webhookData);
     let result = { event: webhookAndHeader.event, header: { 'stripe-signature': webhookAndHeader.header } };
-    console.log(JSON.stringify(result));
     return result;
 }
