@@ -3,7 +3,7 @@ import { generateStripeEvent } from '../stripe/generator';
 import { AdyenWebhookData, AdyenWebhookDataParams } from '../adyen/adyen-webhook-data';
 import { StripeWebhookData, StripeWebhookDataParams } from '../stripe/stripe-webhook-data';
 
-export function generateAdyenWebhook(webhookDataParams: AdyenWebhookDataParams) {
+export function generateAdyenWebhook(webhookDataParams: AdyenWebhookDataParams): any {
     console.log('adyen');
     let webhookData = new AdyenWebhookData(webhookDataParams);
     let event = generateAdyenEvent(webhookData);
@@ -11,7 +11,7 @@ export function generateAdyenWebhook(webhookDataParams: AdyenWebhookDataParams) 
     return event;
 }
 
-export function generateStripeWebhook(webhookDataParams: StripeWebhookDataParams) {
+export function generateStripeWebhook(webhookDataParams: StripeWebhookDataParams): any {
     console.log('stripe');
     let webhookData = new StripeWebhookData(webhookDataParams);
     let webhookAndHeader = generateStripeEvent(webhookData);
