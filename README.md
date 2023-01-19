@@ -91,6 +91,21 @@ If you will not specify these data, library will use the default data.
 
 Note: you should send the 'stripe-signature' header with calculated hmac header on sending your POST webhook request.
 
+## Ivy
+
+To use this generation, just call `generateIvyWebhook({prop: value, ...})` 
+
+```
+let customWebhook = customWebhookAndHeader.event; // webhook object
+let customWebhookHeader = customWebhookAndHeader.header; // header object like {'x-ivy-signature': 'here-will-be-a-signed-string'}
+
+```
+
+If you will not specify these data, library will use the default data.
+
+Note: you should send the 'x-ivy-signature' header with calculated hmac header on sending your POST webhook request.
+
 ### Used libraries
 
 - [Stripe](https://github.com/stripe/stripe-node)
+- [Ivy](https://docs.getivy.de/integration/webhooks)
